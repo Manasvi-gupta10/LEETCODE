@@ -20,10 +20,10 @@ class Solution {
         ArrayList<Integer> ls=new ArrayList<>();
         while(!q.isEmpty()){
             int sz=q.size();
-            ls=new ArrayList<>();
+            int s=0;
             for(int i=0;i<sz;i++){
                 TreeNode rem=q.poll();
-                ls.add(rem.val);
+                s+=rem.val;
                 if(rem.left!=null){
                     q.add(rem.left);
                 }
@@ -31,11 +31,9 @@ class Solution {
                     q.add(rem.right);
                 }
             }
+            ls.add(s);
         }
-        int sum=0;
-        for(int i=0;i<ls.size();i++){
-            sum+=ls.get(i);
-        }
-        return sum;
+        
+        return ls.get(ls.size()-1);
     }
 }
