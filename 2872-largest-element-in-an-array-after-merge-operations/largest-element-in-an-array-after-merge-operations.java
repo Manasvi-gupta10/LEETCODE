@@ -1,3 +1,4 @@
+
 class Solution {
     public long maxArrayValue(int[] nums) {
         int n=nums.length;
@@ -10,6 +11,7 @@ class Solution {
             int i=ls.size()-1;
             boolean work=false;
             while(i>0){
+                
                 if(ls.get(i-1)<=ls.get(i)){
                     long newv=ls.get(i)+ls.get(i-1);
                     ls.remove(i);
