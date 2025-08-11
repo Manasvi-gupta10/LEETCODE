@@ -1,3 +1,4 @@
+
 class Solution {
     public long minimumTime(int[] time, int totalTrips) {
         int n=time.length;
@@ -6,7 +7,7 @@ class Solution {
         for(int i=0;i<n;i++){
             hi=Math.min(hi,(long)time[i]);
         }
-        hi=hi*totalTrips;
+        hi=hi*totalTrips;//worst case is ki jo km se km time lg rha jis bus m ussi m saare trip horhe
         long ans=0;
         while(lo<=hi){
             long mid=(lo+hi)/2;
