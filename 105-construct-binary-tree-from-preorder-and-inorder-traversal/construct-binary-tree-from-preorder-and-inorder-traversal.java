@@ -15,27 +15,26 @@
  */
 class Solution {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        return buildtree(inorder,preorder,0,inorder.length-1,0,preorder.length-1);
-        
+        return build(preorder,inorder,0,inorder.length-1,0,preorder.length-1);
     }
-    public TreeNode buildtree(int[] in,int[] pre,int ilo,int ihi,int plo,int phi){
+    public TreeNode build(int[] pre,int[] in,int ilo,int ihi,int plo,int phi){
         if(ilo>ihi||plo>phi){
             return null;
         }
-        TreeNode node=new TreeNode(pre[plo]);
+
+        TreeNode root=new TreeNode(pre[plo]);
         int idx=search(in,ilo,ihi,pre[plo]);
         int c=idx-ilo;
-        node.left=buildtree(in,pre,ilo,idx-1,plo+1,plo+c);
-        node.right=buildtree(in,pre,idx+1,ihi,plo+c+1,phi);
-        return node;
+        root.left=build(pre,in,ilo,idx-1,plo+1,plo+c);
+        root.right=build(pre,in,idx+1,ihi,plo+c+1,phi);
+        return root;
     }
-    public int search(int[] in,int ilo,int ihi,int el){
+    public int search(int[] in,int ilo,int ihi,int elm){
         for(int i=ilo;i<=ihi;i++){
-            if(in[i]==el){
+            if(in[i]==elm){
                 return i;
             }
         }
         return -1;
-
     }
 }
