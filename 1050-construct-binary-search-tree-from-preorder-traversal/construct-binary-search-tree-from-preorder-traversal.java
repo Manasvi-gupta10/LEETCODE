@@ -26,7 +26,7 @@ class Solution {
         }
         TreeNode root=new TreeNode(pre[s]);
         int idx=find(pre,s+1,e,pre[s]);
-        if(idx==-1){
+        if(idx==-1){//saare elm root se chote toh left subtree m ayenge
             root.left=build(pre,s+1,e);
             root.right=null;
         }else{
