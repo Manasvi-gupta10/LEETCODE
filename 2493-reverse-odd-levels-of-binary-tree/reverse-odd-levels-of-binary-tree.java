@@ -1,3 +1,4 @@
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -39,13 +40,13 @@ class Solution {
                     }
                 }
                 if(!ar.isEmpty()){
-                    Collections.reverse(ar);
-                int i=0;
+                    //Collections.reverse(ar);
+                int i=ar.size()-1;
                
                 for(int j=0;j<ls.size()&&i<ar.size();j++){
                     TreeNode cur=ls.get(j);
-                    cur.left.val=ar.get(i++);
-                    cur.right.val=ar.get(i++);
+                    cur.left.val=ar.get(i--);
+                    cur.right.val=ar.get(i--);
                     
                 }
                 }
