@@ -1,3 +1,4 @@
+
 class Solution {
     public int areaOfMaxDiagonal(int[][] dimensions) {
         int n=dimensions.length;
