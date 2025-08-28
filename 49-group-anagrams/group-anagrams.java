@@ -1,3 +1,4 @@
+
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         HashMap<String,List<String>> map=new HashMap<>();
@@ -22,7 +23,7 @@ class Solution {
         }
         StringBuilder sb=new StringBuilder();
         for(int i=0;i<fr.length;i++){
-            sb.append(fr[i]+" ");
+            sb.append(fr[i]+" ");//space to distimguish for two digit numbet
         }
         return sb.toString();
     }
