@@ -1,29 +1,28 @@
-
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> ans=new ArrayList<>();
         HashMap<String,List<String>> map=new HashMap<>();
         for(int i=0;i<strs.length;i++){
-            String k=getkey(strs[i]);
-            if(!map.containsKey(k)){
-                map.put(k,new ArrayList<>());
+            String s=key(strs[i]);
+            if(!map.containsKey(s)){
+                map.put(s,new ArrayList<>());
             }
-            map.get(k).add(strs[i]);
+            map.get(s).add(strs[i]);
+
         }
-        List<List<String>> ans=new ArrayList<>();
-        for(String key:map.keySet()){
-            ans.add(map.get(key));
+        for(String s:map.keySet()){
+            ans.add(map.get(s));
         }
         return ans;
     }
-    public String getkey(String s){
+    public String key(String s){
         int[] fr=new int[26];
         for(int i=0;i<s.length();i++){
-            char ch=s.charAt(i);
-            fr[ch-'a']++;
+            fr[s.charAt(i)-'a']++;
         }
         StringBuilder sb=new StringBuilder();
-        for(int i=0;i<fr.length;i++){
-            sb.append(fr[i]+" ");//space to distimguish for two digit numbet
+        for(int i=0;i<26;i++){
+            sb.append(fr[i]+" ");
         }
         return sb.toString();
     }
