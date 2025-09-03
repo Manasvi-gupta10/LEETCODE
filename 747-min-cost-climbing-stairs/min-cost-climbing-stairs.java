@@ -4,7 +4,7 @@ class Solution {
         int[] dp=new int[n];
         Arrays.fill(dp,-1);
         int z=steps(cost,0,dp);
-        Arrays.fill(dp,-1);
+        //Arrays.fill(dp,-1);
         int o=steps(cost,1,dp);
         return Math.min(z,o);
     }
