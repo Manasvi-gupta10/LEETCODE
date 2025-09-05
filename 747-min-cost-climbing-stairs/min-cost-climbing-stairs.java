@@ -15,9 +15,9 @@ class Solution {
         if(dp[i]!=-1){
             return dp[i];
         }
-        int one=steps(ar,i+1,dp);
-        int two=steps(ar,i+2,dp);
-        return dp[i]=Math.min(one,two)+ar[i];
+        int one=steps(ar,i+1,dp)+ar[i];
+        int two=steps(ar,i+2,dp)+ar[i];
+        return dp[i]=Math.min(one,two);
 
     }
 }
