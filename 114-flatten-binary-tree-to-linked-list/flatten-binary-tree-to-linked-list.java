@@ -15,23 +15,27 @@
  */
 class Solution {
     public void flatten(TreeNode root) {
-        root=makell(root);
-    }
-    public TreeNode makell(TreeNode root){
-       if(root==null){
-         return null;
-       }
-       if(root.left==null&&root.right==null){
-        return root;
-       }
+        
+        root=ll(root);
 
-        TreeNode left=makell(root.left);
-        TreeNode right=makell(root.right);
+    }
+    public TreeNode ll(TreeNode root){
+        if(root==null){
+            return null;
+        }
+        if(root.left==null&&root.right==null){
+            return root;
+        }
+        TreeNode ltail=ll(root.left);
+        TreeNode rtail=ll(root.right);
         if(root.left!=null){
-            left.right=root.right;
+            ltail.right=root.right;
             root.right=root.left;
             root.left=null;
         }
-        return right!=null?right:left;
+        if(rtail!=null){
+            return rtail;
+        }
+        return ltail;
     }
 }
