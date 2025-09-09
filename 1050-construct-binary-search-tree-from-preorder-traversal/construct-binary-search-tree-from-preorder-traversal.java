@@ -15,35 +15,36 @@
  */
 class Solution {
     public TreeNode bstFromPreorder(int[] preorder) {
-        return build(preorder,0,preorder.length-1);
+        return order(preorder,0,preorder.length-1);
     }
-    public TreeNode build(int[] pre,int s,int e){
-        if(s>e){
-            return null;
-        }
+    public TreeNode order(int[] pre,int s,int e){
+        
         if(s==e){
             return new TreeNode(pre[s]);
         }
-        TreeNode root=new TreeNode(pre[s]);
-        int idx=find(pre,s+1,e,pre[s]);
-        if(idx==-1){//saare elm root se chote toh left subtree m ayenge
-            root.left=build(pre,s+1,e);
-            root.right=null;
-        }else{
-            root.left=build(pre,s+1,idx-1);
-            root.right=build(pre,idx,e);
+        if(s>e){
+            return null;
         }
-        
-        
-        return root;
+        TreeNode node=new TreeNode(pre[s]);
+        int idx=find(pre,s+1,e,pre[s]);
+        if(idx==-1){
+            node.left=null;
+            node.right=order(pre,s+1,e);
+        }
+       else{
+         node.left=order(pre,s+1,idx);
+        node.right=order(pre,idx+1,e);
+       }
+        return node;
+
     }
-    public int find(int[] pre,int s,int e,int r){
+    public int find(int[] pre,int s,int e,int el){
+        int idx=-1;
         for(int i=s;i<=e;i++){
-            if(pre[i]>r){
-                return i;
+            if(pre[i]<el){
+                idx=i;
             }
         }
-        return -1;
-
+        return idx;
     }
 }
