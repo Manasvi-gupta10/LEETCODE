@@ -3,8 +3,6 @@ class Solution {
         int n=grid.length;
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
-                //System.out.print(grid[i][j]);
-                
                 if(i==j&&grid[i][j]==0){
                     return false;
                 }else if(i+j==n-1&&grid[i][j]==0){
