@@ -6,13 +6,11 @@ class Solution {
         return ans;
     }
     public void subset(int[] ar,int in,List<List<Integer>> an,List<Integer> ls){
-        if(in>=ar.length){
-            an.add(new ArrayList<>(ls));
-            return;
+        an.add(new ArrayList<>(ls));
+        for(int i=in;i<ar.length;i++){
+            ls.add(ar[i]);
+            subset(ar,i+1,an,ls);
+            ls.remove(ls.size()-1);
         }
-        subset(ar,in+1,an,ls);
-        ls.add(ar[in]);
-        subset(ar,in+1,an,ls);
-        ls.remove(ls.size()-1);
     }
 }
