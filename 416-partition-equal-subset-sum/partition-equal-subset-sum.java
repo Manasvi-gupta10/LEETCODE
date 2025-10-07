@@ -9,24 +9,21 @@ class Solution {
             return false;
         }
         int target=total/2;
-        Boolean[][] dp=new Boolean[n][target+1];
-        return make(nums,0,target,dp);
-    }
-    public boolean make(int[] ar,int in,int val,Boolean[][] dp){
-        if(val==0){
-            return true;
+        boolean[][] dp=new boolean[target+1][n+1];
+        for(int i=0;i<dp[0].length;i++){
+            dp[0][i]=true;
         }
-        if(val<0){
-            return false;
+        for(int i=1;i<dp.length;i++){
+            for(int j=1;j<dp[0].length;j++){
+                boolean inc=false,ex=false;
+                if(i-nums[j-1]>=0){
+                    inc=dp[i-nums[j-1]][j-1];
+                }
+                ex=dp[i][j-1];
+                dp[i][j]=inc||ex;
+
+            }
         }
-        if(in==ar.length){
-            return false;
-        }
-        if(dp[in][val]!=null){
-            return dp[in][val];
-        }
-        boolean inc=make(ar,in+1,val-ar[in],dp);
-        boolean ex=make(ar,in+1,val,dp);
-        return dp[in][val]=inc||ex;
+        return dp[dp.length-1][dp[0].length-1];
     }
 }
