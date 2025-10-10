@@ -9,23 +9,23 @@ class Solution {
                 dp[len]=nums[i];
                 len++;
             }else{
-                int in=index(dp,0,len-1,nums[i]);
+                int in=find(dp,0,len-1,nums[i]);
                 dp[in]=nums[i];
             }
         }
         return len;
     }
-    public int index(int[] dp,int i,int j,int v){
-        int an=0;
+    public int find(int[] ar,int i,int j,int v){
+        int ans=0;
         while(i<=j){
-            int mid=i+(j-i)/2;
-            if(dp[mid]>=v){
-                an=mid;
-                j=mid-1;
+            int m=i+(j-i)/2;
+            if(ar[m]>=v){
+                ans=m;
+                j=m-1;
             }else{
-                i=mid+1;
+                i=m+1;
             }
         }
-        return an;
+        return ans;
     }
 }
