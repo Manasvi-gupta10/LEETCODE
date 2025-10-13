@@ -6,19 +6,18 @@ class Solution {
         for(int i=0;i<=n-3;i++){
             int l=i+1;
             int r=n-1;
-            
             while(l<r){
-            int sum=nums[i]+nums[l]+nums[r];
-            if(Math.abs(sum-target)<Math.abs(closet-target)){
-                closet=sum;
-            }
-            if(sum<target){
-                l++;
-            }else if(sum>target){
-                r--;
-            }else{
-                return sum;
-            }
+                int s=nums[i]+nums[l]+nums[r];
+                if(Math.abs(target-s)<Math.abs(target-closet)){
+                    closet=s;
+                }
+                if(s<target){
+                    l++;
+                }else if(s>target){
+                    r--;
+                }else{
+                    return s;
+                }
             }
         }
         return closet;
