@@ -1,5 +1,3 @@
-
-import java.util.*;
 class Solution {
     public String frequencySort(String s) {
         int n=s.length();
@@ -8,8 +6,8 @@ class Solution {
             map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
         }
         PriorityQueue<pair> pq=new PriorityQueue<>((a,b)->b.fr-a.fr);
-        for(Character k:map.keySet()){
-            pq.add(new pair(k,map.get(k)));
+        for(char ch:map.keySet()){
+            pq.add(new pair(ch,map.get(ch)));
         }
         StringBuilder sb=new StringBuilder();
         while(!pq.isEmpty()){
@@ -20,13 +18,13 @@ class Solution {
         }
         return sb.toString();
     }
-    class pair{
-        char ch;
-        int fr;
-        public pair(char ch,int fr){
-            this.ch=ch;
-            this.fr=fr;
 
-        }
+}
+class pair{
+    char ch;
+    int fr;
+    public pair(char ch,int fr){
+        this.ch=ch;
+        this.fr=fr;
     }
 }
