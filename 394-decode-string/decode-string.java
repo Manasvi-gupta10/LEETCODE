@@ -6,6 +6,7 @@ class Solution {
         for(int i=0;i<n;i++){
             char ch=s.charAt(i);
             if(Character.isDigit(ch)){
+                //handling multidigit case like 10<= 
                 int v=ch-'0';
                 if(!st.isEmpty()&&i>0&&Character.isDigit(s.charAt(i-1))){
                     v+=st.pop()*10;
@@ -32,7 +33,7 @@ class Solution {
                 op.push(ch+"");
             }
         }
-        System.out.print(op);
+        //System.out.print(op);
         StringBuilder ans=new StringBuilder();
         while(!op.isEmpty()){
             
