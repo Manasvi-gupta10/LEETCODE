@@ -1,29 +1,25 @@
 class Solution {
     public boolean isBipartite(int[][] graph) {
-        Queue<bipartpair> q=new LinkedList<>();
         HashMap<Integer,Integer> visited=new HashMap<>();
+        Queue<pair> q=new LinkedList<>();
         for(int i=0;i<graph.length;i++){
             if(visited.containsKey(i)){
                 continue;
             }
-            q.add(new bipartpair(i,0));
+            q.add(new pair(i,0));
             while(!q.isEmpty()){
-                //1
-                bipartpair b=q.poll();
-                //2
-                if(visited.containsKey(b.vtx)){
-                    if(visited.get(b.vtx)!=b.dis){
+                pair r=q.poll();
+                if(visited.containsKey(r.vtx)){
+                    if(visited.get(r.vtx)!=r.dis){
                         return false;
+                    }else{
+                        continue;
                     }
-                    continue;
                 }
-                //3
-                visited.put(b.vtx,b.dis);
-                //4
-                //5
-                for(int j:graph[b.vtx]){
-                    if(!visited.containsKey(j)){
-                        q.add(new bipartpair(j,b.dis+1));
+                visited.put(r.vtx,r.dis);
+                for(int nbr:graph[r.vtx]){
+                    if(!visited.containsKey(nbr)){
+                        q.add(new pair(nbr,r.dis+1));
                     }
                 }
             }
@@ -31,10 +27,10 @@ class Solution {
         return true;
     }
 }
-class bipartpair{
+class pair{
     int vtx;
     int dis;
-    public bipartpair(int vtx,int dis){
+    public pair(int vtx,int dis){
         this.vtx=vtx;
         this.dis=dis;
     }
