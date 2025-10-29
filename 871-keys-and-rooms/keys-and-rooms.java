@@ -1,6 +1,7 @@
 class Solution {
     public boolean canVisitAllRooms(List<List<Integer>> rooms) {
         //keys are telling ki is room se kin rooms m ja skte mtlb neighbours hi
+        //if single component toh possible to go to every vertex here rooms
         int n=rooms.size();
         HashSet<Integer> visited=new HashSet<>();
         Queue<Integer> q=new LinkedList<>();
