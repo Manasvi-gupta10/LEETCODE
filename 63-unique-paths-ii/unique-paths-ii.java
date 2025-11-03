@@ -2,35 +2,23 @@ class Solution {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
         int n=obstacleGrid.length;
         int m=obstacleGrid[0].length;
-        if(obstacleGrid[0][0]==1){
+        int[][] dp=new int[n][m];
+        return path(obstacleGrid,0,0,dp);
+    }
+    public int path(int[][] ar,int r,int c,int[][] dp){
+        if(r<0||c<0||r>=ar.length||c>=ar[0].length||ar[r][c]==1){
             return 0;
         }
-        int[][] dp=new int[n][m];
-        dp[0][0]=1;
-        for(int i=1;i<n;i++){
-            if(obstacleGrid[i][0]==1){
-                    dp[i][0]=0;
-                }
-                else
-            dp[i][0]=dp[i-1][0];
-        }
-        for(int i=1;i<m;i++){
-            if(obstacleGrid[0][i]==1){
-                    dp[0][i]=0;
-                }
-                else
-            dp[0][i]=dp[0][i-1];
-        }
-        for(int i=1;i<n;i++){
-            for(int j=1;j<m;j++){
-                if(obstacleGrid[i][j]==1){
-                    dp[i][j]=0;
-                }else{
-                    dp[i][j]=dp[i-1][j]+dp[i][j-1];
-                }
-            }
-        }
-        return dp[n-1][m-1];
 
+        if(r==ar.length-1&&c==ar[0].length-1){
+            return 1;
+        }
+        if(dp[r][c]!=0){
+            return dp[r][c];
+        }
+        int an=0;
+        an+=path(ar,r+1,c,dp);
+        an+=path(ar,r,c+1,dp);
+        return dp[r][c]=an;
     }
 }
