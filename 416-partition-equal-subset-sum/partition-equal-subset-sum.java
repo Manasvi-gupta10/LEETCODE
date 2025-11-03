@@ -14,7 +14,7 @@ class Solution {
     public boolean poss(int target,int[] ar){
         int n=ar.length;
         boolean[][] dp=new boolean[n+1][target+1];
-        Arrays.fill(dp[0],false);
+        //Arrays.fill(dp[0],false);
         for(int i=0;i<dp.length;i++){
             dp[i][0]=true;
         }
