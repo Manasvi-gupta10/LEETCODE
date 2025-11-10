@@ -18,6 +18,8 @@ class Solution {
                     nextlarge++;
                 }
             }
+            //calculating us elm k left m small and large elm and same with right 
+            //increasing k liye har prev small map with har next large to make a valid team toh *...same for decreasing
             ans+=prevsmall*nextlarge;
             ans+=prevlarge*nextsmall;
         }
