@@ -1,0 +1,9 @@
+class Solution {
+    public int maximizeExpressionOfThree(int[] nums) {
+        int n=nums.length;
+        
+        Arrays.sort(nums);
+        int ans=(nums[n-2]+nums[n-1])-nums[0];
+        return ans;
+    }
+}
