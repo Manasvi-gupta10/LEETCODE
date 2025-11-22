@@ -6,8 +6,10 @@ class Solution {
             if(nums[i]%3==0){
                 continue;
             }
+            int r1=nums[i]%3;
+            int r2=3-nums[i]%3;
             
-            ans++;
+            ans+=Math.min(r1,r2);
         }
         return ans;
     }
