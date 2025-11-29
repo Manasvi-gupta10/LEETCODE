@@ -5,10 +5,7 @@ class Solution {
         for(int i=0;i<n;i++){
             sum+=nums[i];
         }
-        if(sum%k==0){
-            return 0;
-
-        }
+        
         return sum%k;
         
     }
