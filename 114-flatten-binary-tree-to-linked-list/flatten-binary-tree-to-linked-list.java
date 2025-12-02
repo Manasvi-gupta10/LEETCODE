@@ -15,27 +15,26 @@
  */
 class Solution {
     public void flatten(TreeNode root) {
-        
-        root=ll(root);
 
+        ll(root);
     }
     public TreeNode ll(TreeNode root){
         if(root==null){
-            return null;
+            return root;
         }
         if(root.left==null&&root.right==null){
             return root;
         }
-        TreeNode ltail=ll(root.left);
-        TreeNode rtail=ll(root.right);
-        if(root.left!=null){
-            ltail.right=root.right;
+        TreeNode l=ll(root.left);
+        TreeNode r=ll(root.right);
+        if(l!=null){
+            l.right=root.right;
             root.right=root.left;
             root.left=null;
         }
-        if(rtail!=null){
-            return rtail;
+        if(r!=null){
+            return r;
         }
-        return ltail;
+        return l;
     }
 }
