@@ -25,12 +25,5 @@ class Solution {
             }
         }
     }
-    public boolean contain(int[] ar,int in,int e){
-        for(int i=in;i<ar.length;i++){
-            if(ar[i]==e){
-                return true;
-            }
-        }
-        return false;
-    }
+   
 }
