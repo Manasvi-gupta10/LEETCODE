@@ -4,7 +4,7 @@ class Solution {
         int balance = 0;
         int start = 0;
 
-        // Step 1: split into top-level special substrings
+       
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == '1') balance++;
             else balance--;
@@ -16,10 +16,10 @@ class Solution {
             }
         }
 
-        // Step 2: sort in descending order
+        
         Collections.sort(parts, Collections.reverseOrder());
 
-        // Step 3: join all parts
+        
         StringBuilder ans = new StringBuilder();
         for (String p : parts) {
             ans.append(p);
