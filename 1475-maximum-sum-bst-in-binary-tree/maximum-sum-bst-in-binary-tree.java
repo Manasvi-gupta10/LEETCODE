@@ -1,4 +1,3 @@
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -16,39 +15,42 @@
  */
 class Solution {
     public int maxSumBST(TreeNode root) {
-        return valid(root).ans;
+        return maxsum(root).ans;
     }
-    public bstpair valid(TreeNode root){
+    public pair maxsum(TreeNode root){
         if(root==null){
-            return new bstpair();
+            return new pair();
         }
-        bstpair left=valid(root.left);
-        bstpair right=valid(root.right);
-        bstpair rt=new bstpair();
-        
-        if(left.mx<root.val&&root.val<right.mn&&left.isbst&&right.isbst){
-            rt.isbst=true;
+        pair l=maxsum(root.left);
+        pair r=maxsum(root.right);
+        pair self=new pair();
+        if(l.mx<root.val&&r.mn>root.val&&l.isbst&&r.isbst){
+            self.isbst=true;
         }else{
-            rt.isbst=false;
+            self.isbst=false;
         }
-        rt.mx=Math.max(root.val,Math.max(left.mx,right.mx));
-        rt.mn=Math.min(root.val,Math.min(left.mn,right.mn));
-        rt.sum=left.sum+right.sum+root.val;
-        if(rt.isbst){
-            rt.ans=Math.max(left.ans,Math.max(right.ans,rt.sum));
+        self.cur=l.cur+r.cur+root.val;
+        self.mn=Math.min(root.val,Math.min(l.mn,r.mn));
+        self.mx=Math.max(root.val,Math.max(l.mx,r.mx));
+        if(self.isbst){
+            self.ans=Math.max(self.cur,Math.max(l.ans,r.ans));
         }else{
-            rt.ans=Math.max(left.ans,right.ans);
+            self.ans=Math.max(l.ans,r.ans);
         }
-        return rt;
-
-
+        return self;
     }
-    class bstpair{
-        //lomg m as constraints m int ki max and min toh logg as normally bst m duplicate n hote
-        long mx=Long.MIN_VALUE;
-        long mn=Long.MAX_VALUE;
-        boolean isbst=true;
-        int sum=0;//root se neche tk ka tree ka sum
-        int ans=0;//bst part sum
+}
+class pair{
+    int mn;
+    int mx;
+    int ans;
+    int cur;
+    boolean isbst;
+    public pair(){
+        mn=Integer.MAX_VALUE;
+        mx=Integer.MIN_VALUE;
+        ans=0;
+        cur=0;
+        isbst=true;
     }
 }
