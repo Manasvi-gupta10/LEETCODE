@@ -6,11 +6,15 @@ class Solution {
         int n = s.length();
         StringBuilder sb = new StringBuilder();
 
-        // index -> list of replacement indices
+        
         Map<Integer, List<Integer>> map = new HashMap<>();
 
         for (int i = 0; i < indices.length; i++) {
-            map.computeIfAbsent(indices[i], k -> new ArrayList<>()).add(i);
+            if(!map.containsKey(indices[i])){
+                map.put(indices[i],new ArrayList<>());
+            }
+            map.get(indices[i]).add(i);
+            
         }
 
         int i = 0;
@@ -28,7 +32,7 @@ class Solution {
                         sb.append(tgt);
                         i += src.length();
                         replaced = true;
-                        break; // apply only one replacement
+                        break; 
                     }
                 }
             }
