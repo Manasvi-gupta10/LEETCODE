@@ -1,17 +1,15 @@
-
 class Solution {
     public long minimumTime(int[] time, int totalTrips) {
-        int n=time.length;
+        Arrays.sort(time);
         long lo=1;
-        long hi=Integer.MAX_VALUE;
-        for(int i=0;i<n;i++){
-            hi=Math.min(hi,(long)time[i]);
-        }
-        hi=hi*totalTrips;//worst case is ki jo km se km time lg rha jis bus m ussi m saare trip horhe
+        int n=time.length;
+        long hi=(long)time[0]*totalTrips;
         long ans=0;
+        
+        
         while(lo<=hi){
-            long mid=(lo+hi)/2;
-            if(ispos(time,mid,totalTrips)){
+            long mid=lo+(hi-lo)/2;
+            if(ispos(time,totalTrips,mid)){
                 ans=mid;
                 hi=mid-1;
             }else{
@@ -19,16 +17,18 @@ class Solution {
             }
         }
         return ans;
+
+        
+
     }
-    public boolean ispos(int[] ar,long t,int tottrip){
-        long com=0;
+    public boolean ispos(int[] ar,int tr,long tm){
+        long ct=0;
         for(int i=0;i<ar.length;i++){
-             com+=t/ar[i];
-            if(com>=tottrip){
+            ct+=tm/ar[i];
+            if(ct>=tr){
                 return true;
             }
         }
-        return com>=tottrip;
-
+        return ct>=tr;
     }
 }
