@@ -1,6 +1,7 @@
 class Solution {
     public List<Integer> eventualSafeNodes(int[][] graph) {
-        List<List<Integer>> ls=new ArrayList<>();
+        //ls is reverse of edges ek type se
+        List<List<Integer>> ls=new ArrayList<>();//ls m wo list of edges hongi ith p jha se m i pe aaskti
         int n=graph.length;
         for(int i=0;i<n;i++){
             ls.add(new ArrayList<>());
@@ -13,6 +14,7 @@ class Solution {
             }
             
         }
+        //terminal vertexes safe hote hi as wha s koi edges ni aur toh wha se us wle terminal p jaa skte
         List<Integer> ans=new ArrayList<>();
         Queue<Integer> q=new LinkedList<>();
         for(int i=0;i<n;i++){
@@ -24,7 +26,7 @@ class Solution {
             int t=q.poll();
             ans.add(t);
             for(int nb:ls.get(t)){
-                out[nb]--;
+                out[nb]--;//t wla safe hai aur nb->t wla hta skte
                 if(out[nb]==0){
                     q.add(nb);
                 }
