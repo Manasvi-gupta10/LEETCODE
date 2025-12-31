@@ -1,26 +1,30 @@
 class Solution {
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
-        int n=graph.length;
-        List<Integer> ls=new ArrayList<>();
         List<List<Integer>> ans=new ArrayList<>();
-        paths(graph,ls,ans,0,n-1);
+        List<Integer> ls=new ArrayList<>();
+        paths(graph,ls,ans,0,graph.length-1,new HashSet<Integer>());
         return ans;
+
+        
     }
-    public void paths(int[][] graph,List<Integer> ls,List<List<Integer>> ans,int src,int des){
+    public void paths(int[][] edges,List<Integer> ls,List<List<Integer>> ans,int src,int des,HashSet<Integer> set){
         if(src==des){
             ls.add(src);
             ans.add(new ArrayList<>(ls));
             ls.remove(ls.size()-1);
             return;
         }
+
+        set.add(src);
         
-        for(int nb:graph[src]){
-            
+        for(int nb:edges[src]){
+            if(!set.contains(nb)){
                 ls.add(src);
-                paths(graph,ls,ans,nb,des);
+                paths(edges,ls,ans,nb,des,set);
                 ls.remove(ls.size()-1);
-            
+            }
         }
         
+        set.remove(src);
     }
 }
