@@ -20,10 +20,13 @@ class Solution {
                 ls.add(i);
             }
         }
+        //edges add hongi 2 vertex k beechme if odd aesi vertex jinki degree odd toh ek rh hi jayegi jiska deg kabh bhi even ni ho payegi
+        //almost 2 add krnu toh 4 hi hoksti ..6 k liye km se km 3 chaiye 
         if(ls.size()%2!=0||ls.size()>4){
             return false;
         }
-        
+        //agr 2 ki deg odd ya do unme hi lgado edges used 1
+        //ya un do ki aesi se jisse dono hi na ho wha 2 use hongi
         if(ls.size()==2){
             int u=ls.get(0);
             int v=ls.get(1);
@@ -44,6 +47,7 @@ class Solution {
                 }
 
             }
+            //4 hai toh unme hi aaps m toh yha 2 edges use hojayengi in 4 ki sbse ni as usme 4 edges chaiye hongi
         }else if(ls.size()==4){
             int a=ls.get(0);
             int b=ls.get(1);
