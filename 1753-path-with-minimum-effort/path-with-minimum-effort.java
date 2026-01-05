@@ -33,7 +33,7 @@ class Solution {
                 
             }
         }
-        return ans;
+        return dis[n-1][m-1];
         
     }
     
