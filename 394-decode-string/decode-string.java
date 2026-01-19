@@ -1,45 +1,44 @@
 class Solution {
     public String decodeString(String s) {
-        Stack<Integer> st=new Stack<>();
-        Stack<String> op=new Stack<>();
         int n=s.length();
+        Stack<String> st=new Stack<>();
+        StringBuilder sb=new StringBuilder();
         for(int i=0;i<n;i++){
             char ch=s.charAt(i);
             if(Character.isDigit(ch)){
-                //handling multidigit case like 10<= 
-                int v=ch-'0';
-                if(!st.isEmpty()&&i>0&&Character.isDigit(s.charAt(i-1))){
-                    v+=st.pop()*10;
+                if(!st.isEmpty()&&st.peek().matches("\\d+")){
+                    String s1=st.pop()+ch;
+                    st.push(s1);
+                }else{
+                    st.push(ch+"");
                 }
-                st.push(v);
             }
             else if(ch=='['){
-                op.push("[");
+                st.push(ch+"");
             }
             else if(ch==']'){
-                StringBuilder sb=new StringBuilder();
-                while(!op.isEmpty()&&!op.peek().equals("[")){
-                    sb.insert(0,op.pop());
+                StringBuilder temp=new StringBuilder();
+                while(!st.isEmpty()&&!st.peek().equals("[")){
+                    temp.insert(0,st.pop());
                 }
-                op.pop();
+                st.pop();
+                int num=Integer.parseInt(st.pop());
+                StringBuilder t=new StringBuilder();
                 
-                int t=st.pop();
-                 StringBuilder b=new StringBuilder();
-                 for(int j=0;j<t;j++){
-                    b.append(sb);
-                 }
-                 op.push(b.toString());
+                while(num-->0){
+                    t.append(temp);
+                }
+                st.push(t.toString());
+
             }else{
-                op.push(ch+"");
+                st.push(ch+"");
             }
+
         }
-        //System.out.print(op);
-        StringBuilder ans=new StringBuilder();
-        while(!op.isEmpty()){
-            
-            ans.insert(0,op.pop());
+        for(String e:st){
+            sb.append(e);
         }
-        return ans.toString();
+        return sb.toString();
+        
     }
-    
 }
