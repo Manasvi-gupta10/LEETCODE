@@ -1,46 +1,46 @@
-import java.util.*;
-
 class Solution {
     public int primeSubarray(int[] nums, int k) {
-        int n = nums.length;
-        int si = 0, ans = 0;
-
-        TreeMap<Integer, Integer> primes = new TreeMap<>();
-        ArrayList<Integer> primeIdx = new ArrayList<>();
-
-        for (int ei = 0; ei < n; ei++) {
-
-            if (prime(nums[ei])) {
-                primes.put(nums[ei], primes.getOrDefault(nums[ei], 0) + 1);
-                primeIdx.add(ei);
+        int n=nums.length;
+        int ei=0;
+        int si=0;
+        int ans=0;
+        TreeMap<Integer,Integer> map=new TreeMap<>();
+        ArrayList<Integer> ls=new ArrayList<>();
+        while(ei<n){
+            if(prime(nums[ei])){
+                map.put(nums[ei],map.getOrDefault(nums[ei],0)+1);
+                ls.add(ei);
             }
-
-            while (primes.size() >= 2 &&
-                   primes.lastKey() - primes.firstKey() > k) {
-
-                if (prime(nums[si])) {
-                    int v = nums[si];
-                    primes.put(v, primes.get(v) - 1);
-                    if (primes.get(v) == 0) primes.remove(v);
+            while(map.size()>=2&&map.lastKey()-map.firstKey()>k){
+                if(prime(nums[si])){
+                    map.put(nums[si],map.get(nums[si])-1);
+                    if(map.get(nums[si])==0){
+                        map.remove(nums[si]);
+                    }
                 }
                 si++;
             }
-
-            int m = primeIdx.size();
-            if (m >= 2) {
-                int secondLastPrimeIdx = primeIdx.get(m - 2);
-                if (secondLastPrimeIdx >= si) {
-                    ans += (secondLastPrimeIdx - si + 1);
+            int m=ls.size();
+            if(m>=2){//jb km se km  do prime sho
+                int secl=ls.get(m-2);
+                if(si<=secl){//true hai toh do primes honge hi — ye aur largest wala
+                    //kyuki second element se ei tak wali subarrays invalid hoti hain
+                    ans+=secl-si+1;
+                    
                 }
             }
+            ei++;
         }
         return ans;
     }
-
-    public boolean prime(int n) {
-        if (n < 2) return false;
-        for (int i = 2; i * i <= n; i++) {
-            if (n % i == 0) return false;
+    public boolean prime(int n){
+        if(n<2){
+            return false;
+        }
+        for(int i=2;i*i<=n;i++){
+            if(n%i==0){
+                return false;
+            }
         }
         return true;
     }
