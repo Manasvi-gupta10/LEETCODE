@@ -36,8 +36,8 @@ class Solution {
             if(hasY)
                 ans = Math.max(ans, cur);
 
-            // 🔑 CRITICAL FIX
-            if(cur < 0 && remainingY > 0){
+            
+            if(cur < 0 && remainingY > 0){//agr remaining ni toh jo y tha uska lost hojayega aur mujhe atleast ek y chaiye hi
                 cur = 0;
                 hasY = false;
             }
