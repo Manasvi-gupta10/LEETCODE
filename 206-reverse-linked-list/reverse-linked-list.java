@@ -9,15 +9,30 @@
  * }
  */
 class Solution {
-    public ListNode reverseList(ListNode head) {
-        ListNode temp=head;
-        ListNode prev=null;
-        while(temp!=null){
-            ListNode nxt=temp.next;
-            temp.next=prev;
-            prev=temp;
-            temp=nxt;
+    class pair{
+        ListNode cur;
+        ListNode hd;
+        public pair(ListNode cur,ListNode hd){
+            this.cur=cur;
+            this.hd=hd;
         }
-        return prev;
     }
+    public ListNode reverseList(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        pair p=rev(head);
+        p.cur=null;
+        return p.hd;
+    }
+    public pair rev(ListNode head){
+        if(head.next==null){
+            return new pair(head,head);
+        }
+        pair p=rev(head.next);
+        head.next=null;
+        p.cur.next=head;
+        return new pair(head,p.hd);
+    }
+
 }
