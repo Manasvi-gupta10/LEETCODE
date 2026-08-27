@@ -1,11 +1,10 @@
 class Solution {
     public int numIslands(char[][] grid) {
+        int r=grid.length;
+        int c=grid[0].length;
         int ans=0;
-        int n=grid.length;
-        int m=grid[0].length;
-       // boolean[][] visited=new boolean[n][m];
-        for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
                 if(grid[i][j]=='1'){
                     ans++;
                     dfs(grid,i,j);
@@ -14,15 +13,15 @@ class Solution {
         }
         return ans;
     }
-    public void dfs(char[][] ar,int i,int j){
+    public void dfs(char[][] ar,int r,int c){
+        if(r<0||c<0||r>=ar.length||c>=ar[0].length||ar[r][c]=='0'){
+            return;
+        }
 
-       if(i<0||j<0||i>=ar.length||j>=ar[0].length||ar[i][j]=='0'){
-        return;
-       }
-        ar[i][j]='0';
-        dfs(ar,i+1,j);
-        dfs(ar,i-1,j);
-        dfs(ar,i,j+1);
-        dfs(ar,i,j-1);
+        ar[r][c]='0';
+        dfs(ar,r+1,c);
+        dfs(ar,r,c+1);
+        dfs(ar,r-1,c);
+        dfs(ar,r,c-1);
     }
 }
