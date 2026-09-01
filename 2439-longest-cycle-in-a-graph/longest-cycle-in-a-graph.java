@@ -1,42 +1,46 @@
 class Solution {
     public int longestCycle(int[] edges) {
         int n=edges.length;
-        int[] in=new int[n];
+        int[] ind=new int[n];
         for(int i=0;i<n;i++){
-            if(edges[i]!=-1){
-                in[edges[i]]++;
+            int v=edges[i];
+            if(v==-1){
+                continue;
             }
+            ind[v]++;
         }
         Queue<Integer> q=new LinkedList<>();
         for(int i=0;i<n;i++){
-            if(in[i]==0){
+            if(ind[i]==0){
                 q.add(i);
             }
         }
-        boolean[] visited=new boolean[n];
+        boolean[] visit=new boolean[n];
         while(!q.isEmpty()){
             int r=q.poll();
-            visited[r]=true;
-            if(edges[r]!=-1){
-                in[edges[r]]--;
-                if(in[edges[r]]==0){
-                    q.add(edges[r]);
+            visit[r]=true;
+            int nb=edges[r];
+            if(nb!=-1){
+                ind[nb]--;
+                if(ind[nb]==0){
+                    q.add(nb);
                 }
             }
         }
         int ans=-1;
         for(int i=0;i<n;i++){
-            if(visited[i]==false){
-                int c=1;
-                visited[i]=true;
-                int nb=edges[i];
-                while(nb!=i){
-                    c++;
-                    visited[nb]=true;
-                    nb=edges[nb];
-                }
-                ans=Math.max(ans,c);
+            if(visit[i]==true){
+                continue;
             }
+            visit[i]=true;
+            int l=1;
+            int nb=edges[i];
+            while(nb!=i){
+                l++;
+                visit[nb]=true;
+                nb=edges[nb];
+            }
+            ans=Math.max(ans,l);
         }
         return ans;
     }
